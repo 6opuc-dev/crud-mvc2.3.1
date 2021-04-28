@@ -1,9 +1,11 @@
 package web.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
-@Component
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -11,11 +13,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
+    @NotEmpty(message = "Name should not be empty")
+    @Size(min = 2, max = 20, message = "Wrong name size")
     @Column
     private String name;
+    @NotEmpty(message = "lastname should not be empty")
+    @Size(min = 2, max = 20, message = "Wrong lastname size")
     @Column
     private String lastname;
     @Column
+    @NotEmpty(message = "Email should not be empty")
+    @Email
     private String email;
 
     public User() {
@@ -52,13 +60,16 @@ public class User {
         this.email = email;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
+        return "User " +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+                ", email='" + email + '\'';
     }
 }
