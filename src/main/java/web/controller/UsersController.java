@@ -15,7 +15,7 @@ public class UsersController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping("/")
     public String getUsers(ModelMap model) {
         model.addAttribute("users", userService.getUsers());
         return "users";
@@ -33,7 +33,7 @@ public class UsersController {
             return "new";
         }
         userService.addUser(user);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @GetMapping("users/{id}")
@@ -55,12 +55,12 @@ public class UsersController {
             return "edit";
         }
         userService.updateUser(id, user);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @DeleteMapping("users/{id}")
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
-        return "redirect:/users";
+        return "redirect:/";
     }
 }
