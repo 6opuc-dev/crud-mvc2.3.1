@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-  <form th:method="POST" th:action="@{/users}" th:object="${user}">
+  <form th:method="POST" th:action="@{/admin/users}" th:object="${user}">
     <label for="name">Enter name</label>
     <input type="text" th:field="*{name}" id="name">
     <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
@@ -19,9 +19,19 @@
     <input type="text" th:field="*{email}" id="email">
     <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</p>
     <br>
+    <label for="password">Enter password</label>
+    <input type="password" th:field="*{password}" id="password">
+    <br>
+    <label><input th:type="checkbox" th:field="*{roles}" name="roles" value="ADMIN">ADMIN</label>
+    <br>
+    <label><input th:type="checkbox" th:field="*{roles}" name="roles" value="USER">USER</label>
+    <br>
     <input type="submit" value="Add User">
 
   </form>
+  <br>
+  <br>
+  <a href="/logout"><button th:text="LOGOUT"></button></a>
 </div>
 </body>
 </html>

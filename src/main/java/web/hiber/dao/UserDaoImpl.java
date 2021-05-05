@@ -1,7 +1,4 @@
 package web.hiber.dao;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
@@ -28,21 +25,28 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(String id) {
         return entityManager.find(User.class, id);
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteUserById(String id) {
         entityManager.remove(getUserById(id));
     }
 
     @Override
-    public void updateUser(Long id, User user) {
+    public void updateUser(String id, User user) {
         User userToBeUpdated = getUserById(id);
         userToBeUpdated.setName(user.getName());
         userToBeUpdated.setLastname(user.getLastname());
         userToBeUpdated.setEmail(user.getEmail());
+        userToBeUpdated.setPassword(user.getPassword());
+        userToBeUpdated.setRoles(user.getRoles());
         addUser(userToBeUpdated);
+    }
+
+    @Override
+    public User getUserByName(String s) {
+        return entityManager.find(User.class, s);
     }
 }

@@ -7,9 +7,12 @@
 <body>
 <div>
     <th:block th:each="user : ${users}">
-        <h2><a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user}">VALUE</a></h2>
+        <h2><a th:href="@{/admin/users/{id}(id=${user.getEmail()})}" th:text="${user}">VALUE</a></h2>
     </th:block>
-    <a href="/users/new">Create new user</a>
+    <a href="/admin/new">Create new user</a>
 </div>
+<br>
+<br>
+<a href="/logout"><button th:text="LOGOUT"></button></a>
 </body>
 </html>

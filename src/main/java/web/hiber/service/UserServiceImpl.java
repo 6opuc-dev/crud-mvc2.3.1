@@ -1,16 +1,23 @@
 package web.hiber.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.hiber.dao.UserDao;
+import web.model.Role;
 import web.model.User;
 
+import java.util.Collection;
 import java.util.List;
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserDao userDao;
@@ -26,17 +33,27 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(String id) {
         return userDao.getUserById(id);
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteUserById(String id) {
         userDao.deleteUserById(id);
     }
 
     @Override
-    public void updateUser(Long id, User user) {
+    public void updateUser(String id, User user) {
         userDao.updateUser(id, user);
+    }
+
+    @Override
+    public User getUserByName(String s) {
+        return userDao.getUserByName(s);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return userDao.getUserByName(s);
     }
 }
