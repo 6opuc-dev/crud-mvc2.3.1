@@ -55,7 +55,7 @@ public class AdminController {
         if (bindingResult.hasErrors()) {
             return "edit";
         }
-        userService.updateUser(id, user);
+        userService.updateUser(user);
         return "redirect:/admin/users";
     }
 
