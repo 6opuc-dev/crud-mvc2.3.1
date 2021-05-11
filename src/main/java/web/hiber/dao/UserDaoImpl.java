@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDao {
         userToBeUpdated.setEmail(user.getEmail());
         userToBeUpdated.setPassword(user.getPassword());
         userToBeUpdated.setRoles(user.getRoles());
-        addUser(userToBeUpdated);
+        entityManager.merge(userToBeUpdated);
     }
 
     @Override
